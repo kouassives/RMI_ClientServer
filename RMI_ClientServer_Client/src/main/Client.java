@@ -3,10 +3,10 @@ package main;
  * @author KOUASSI Yves Anselme Magloire
  * @version 13/01/2018
  */
-import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.Scanner;
 
 public class Client {
@@ -16,26 +16,24 @@ public class Client {
      * @param args inutilise
      */
     public static void main(String[] args) {
-	Compte compte = null;
+	Compte stub = null;
 
 	// Récupération du calendrier distant
 	try {
-	    compte = (Compte)Naming.lookup("rmi://localhost/monCompte");
+		Registry registry = LocateRegistry.getRegistry(10000);
+		stub = (Compte)registry.lookup("monCompte");
 	} catch(RemoteException e) {
 	    System.err.println("Pas possible d'acceder à l'objet distant : " + e);
 	    System.exit(-1);
 	} catch(NotBoundException e) {
 	    System.err.println("Pas possible d'acceder à l'objet distant : " + e);
 	    System.exit(-1);
-	} catch(MalformedURLException e) {
-	    System.err.println("Probleme avec l'URL : " + e);
-	    System.exit(-1);
 	}
 
 	// Utilisation du compte
 	try {
 		Scanner sc = new Scanner(System.in);
-	    System.out.print("Le solde du compte est : " + compte.getSolde()+"\n");
+	    System.out.print("Le solde du compte est : " + stub.getSolde()+"\n");
 		boolean continuer =true;
 		String choix="";
 		double montant;
@@ -48,15 +46,15 @@ public class Client {
 		    if(choix.equals("1")) {
 		    	System.out.println("Entrez le montant");
 		    	montant = Integer.valueOf(sc.nextLine());
-		    	if(compte.depot(montant))
-		    		System.out.print("Le nouveau solde du compte est : " + compte.getSolde()+"\n");
+		    	if(stub.depot(montant))
+		    		System.out.print("Le nouveau solde du compte est : " + stub.getSolde()+"\n");
 		    }
 		    else if(choix.equals("2"))
 		    	{
 			    	System.out.println("Entrez le montant");
 			    	montant=Integer.valueOf(sc.nextLine());
-			    	if(compte.retrait(montant))
-			    		System.out.print("Le nouveau solde du compte est : " + compte.getSolde()+"\n");
+			    	if(stub.retrait(montant))
+			    		System.out.print("Le nouveau solde du compte est : " + stub.getSolde()+"\n");
 			    	else
 			    		System.out.print("Retrait impossible le montant "
 			    				+ "sur le solde est inssufisant pour effectuer ce retrait\n");
@@ -65,6 +63,7 @@ public class Client {
 		    	continuer =false;
 		    		
 		}
+		sc.close();
 		
 	} catch(RemoteException e) {
 	    System.err.println("Erreur lors de l'acces aux methodes : " + e);

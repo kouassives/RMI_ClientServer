@@ -14,7 +14,10 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class CompteDistant extends UnicastRemoteObject implements Compte{
 
-	private int idClient;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double solde ;
 	
 	protected CompteDistant() throws RemoteException {
