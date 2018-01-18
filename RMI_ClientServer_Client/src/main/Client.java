@@ -33,11 +33,9 @@ public class Client {
     	String cle = sc.nextLine();
     	rechercherCompte = rechercherCompte(cle);
     }
-    if(rechercherCompte==false) {
-		// Utilisation du compte
+    // Utilisation du compte
 		gesiton(stub);
-	}
-    sc.close();
+	sc.close();
     }
 
     public static void gesiton(Compte stub) {
