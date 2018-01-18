@@ -25,27 +25,21 @@ public class Server {
 		// Creation du RMI registry
 		Registry registry = null;
 		try {
-			registry = LocateRegistry.createRegistry(10000);
+			registry = LocateRegistry.createRegistry(1099);
 			// Creation de l'objet distant
 			
-			Compte skeleton = null;
+			// Enregistrement aupres du Registry
 			try {
-				skeleton = new CompteDistant();
+			    // Enregistrement de l'objet sur le Registry sous les  nom de monCompte
+				registry.rebind("compteSarlIndigoEX01", new CompteDistant());
+				registry.rebind("compteSarlOxigenEX01", new CompteDistant());
 				
-				// Enregistrement aupres du Registry
-				try {
-				    // Enregistrement de l'objet sur le Registry sous le monCompte
-					registry.rebind("monCompte", skeleton);
-				    System.out.println("Le compte est disponible dans le registre");
-				} catch(RemoteException e) {
-				    System.err.println("Impossible de mettre a disposition le compte : " + e);
-				    System.exit(-1);
-				}
-				
+			    System.out.println("Les comptes sont disponible dans le registre");
 			} catch(RemoteException e) {
-			    System.err.println("Erreur lors de la creation de l'objet : " + e);
+			    System.err.println("Impossible de mettre a disposition le compte : " + e);
 			    System.exit(-1);
 			}
+			
 		} catch(RemoteException e) {
 		    System.err.println("Erreur lors de la recuperation du registry : " + e);
 		    System.exit(-1);

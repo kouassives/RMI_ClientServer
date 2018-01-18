@@ -42,6 +42,12 @@ public class CompteDistant extends UnicastRemoteObject implements Compte{
 	public  synchronized boolean depot(double montant) throws RemoteException {
 		// TODO Auto-generated method stub
 		try{
+			try {
+				Thread.sleep(20000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			solde += montant;
 			return true;
 		}catch(Exception e)
@@ -51,7 +57,7 @@ public class CompteDistant extends UnicastRemoteObject implements Compte{
 	}
 
 	@Override
-	public synchronized double getSolde() throws RemoteException {
+	public double getSolde() throws RemoteException {
 		// TODO Auto-generated method stub
 		return solde;
 	}
