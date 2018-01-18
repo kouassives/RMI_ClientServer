@@ -24,6 +24,7 @@ public class Client {
 	} catch (RemoteException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+		System.exit(-1);
 	}
 		
     boolean rechercherCompte = true;
