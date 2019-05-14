@@ -5,14 +5,14 @@
 # RMI_ClientServer
 
 LisezMoi.txt
-*** Calendrier distant en JavaRMI
+*** Comptes distant en JavaRMI
 
 * Les fichiers
 
-- Client.java : l'application cliente qui accède Compte distant.
-- Serveur.java : l'application serveur qui crée et rend disponible un objet de type CompteDistant.
+- Client.java : l'application cliente qui accÃ¨de Compte distant.
+- Serveur.java : l'application serveur qui crÃ©e et rend disponible un objet de type CompteDistant.
 - Compte.java : l'interface du calendrier distant.
-- CompteDistant.java : implémentation de l'interface.
+- CompteDistant.java : implÃ©mentation de l'interface.
 
 * Compilation
 
@@ -22,18 +22,18 @@ LisezMoi.txt
   javac Client.java
   javac Serveur.java
 
-* Exécution
+* ExÃ©cution
 
 Avec 2 terminaux/invites de commandes :
 
 1) Dans le premier terminal : java Serveur
-2) Dans le deuxième terminal : java Client
-3) Dans le terminal du client entrez l'un des clé des compte disponible dans le registre.
+2) Dans le deuxiÃ¨me terminal : java Client
+3) Dans le terminal du client entrez l'un des clÃ© des compte disponible dans le registre.
 	Vous les retouverez dans Serveur.java  : compteSarlIndigoEX01 et compteSarlOxigenEX01.
 4) TEST
 	4-1) Pour les tests des principes du MultiThread, et de la Synchronisation
-	** On lance plus de 1 client se connectant sur le même compte. Choisi par exemple le compte compteSarlIndigoEX01.
-	 ::: On a fait endormir pendant 20s l'exécution de la méthode depot(String) avec le code suivant que vous retrouverez dans l'implementation CompteDistant.java
+	** On lance plus de 1 client se connectant sur le mÃªme compte. Choisi par exemple le compte compteSarlIndigoEX01.
+	 ::: On a fait endormir pendant 20s l'exÃ©cution de la mÃ©thode depot(String) avec le code suivant que vous retrouverez dans l'implementation CompteDistant.java
 	 	try {
 			Thread.sleep(20000);
 		}catch (InterruptedException e) {
@@ -42,13 +42,13 @@ Avec 2 terminaux/invites de commandes :
 		}
 
 	4-2)Cas de Test
-	** On lance un dépot montant 5000 dans le terminal de l'un des clients
-	** Le Solde est à 5000
-	** Maglré que le solde soit à 5000, lancons un retrait de 5200 dans le terminal de l'autre client
+	** On lance un dÃ©pot montant 5000 dans le terminal de l'un des clients
+	** Le Solde est Ã  5000
+	** MaglrÃ© que le solde soit Ã  5000, lancons un retrait de 5200 dans le terminal de l'autre client
 
 	4-3)Resultats de Test
-	** Grâce au mot clé synchronized déclaré dans le prototype des méthodes
-	la méthode depot(String) fait patienter toutes autres méthodes voulant acceder à la variable solde
-	Donc retrait(String) patient. Ensuite après la fin d'exécution de depôt le retrait peut etre effectué 
-5) Dans un autre terminal il est possible de lancer des clients voulant travailler sur un compte différent
-	**Ceux ci seront chacun transporté dans un nouveau thread où ils pourront effectuer les opérations Synchronisées
+	** GrÃ¢ce au mot clÃ© synchronized dÃ©clarÃ© dans le prototype des mÃ©thodes
+	la mÃ©thode depot(String) fait patienter toutes autres mÃ©thodes voulant acceder Ã  la variable solde
+	Donc retrait(String) patient. Ensuite aprÃ¨s la fin d'exÃ©cution de depÃ´t le retrait peut etre effectuÃ© 
+5) Dans un autre terminal il est possible de lancer des clients voulant travailler sur un compte diffÃ©rent
+	**Ceux ci seront chacun transportÃ© dans un nouveau thread oÃ¹ ils pourront effectuer les opÃ©rations SynchronisÃ©es
